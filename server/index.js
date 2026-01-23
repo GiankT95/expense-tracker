@@ -1,16 +1,16 @@
 const express = require("express");
+require("dotenv").config(); // ⬅️ ESTO DEBE IR ARRIBA
 const connectDB = require("./config/db");
 const healthRoutes = require("./routes/health.routes");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(express.json());
+connectDB(); // ⬅️ se ejecuta DESPUÉS de dotenv
 
-// Routes
+app.use(express.json());
 app.use("/health", healthRoutes);
 
-// Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
